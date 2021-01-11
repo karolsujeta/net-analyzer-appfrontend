@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="set-params col-6">
+        <div class="col-6">
+            <form [formGroup]="tcpForm">
+                <div class="form-group">
+                    <label for="port">Port</label>
+                    <input class="form-control" id="port" placeholder="Podaj port TCP" formControlName="port">
+                </div>
+                <div class="form-group">
+                    <label for="amount">Ilość pomiarów</label>
+                    <input class="form-control" id="amount" placeholder="Podaj liczbę pomiarów"
+                        formControlName="amount">
+                </div>
+            </form>
+            <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                <div (click)="subscribeTcpFilterResults()" class="start">
+                    <span class="content">
+                        <span *ngIf="!loading">START</span>
+                        <span *ngIf="loading"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="results col-6">
+        <textarea style="width: 80%;" placeholder="Uruchom filtr aby wyświetlić wyniki" disabled>{{tcpData |json}}</textarea>
+    </div>
+</div>

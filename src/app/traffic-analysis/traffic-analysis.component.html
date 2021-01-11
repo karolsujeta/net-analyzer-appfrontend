@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="set-params col-6">
+        <div class="col-6">
+            <form [formGroup]="trafficForm">
+                <div class="form-group">
+                    <label for="amount">Ilość pomiarów</label>
+                    <input class="form-control" id="amount" placeholder="Podaj ilość pomiarów" formControlName="amount">
+                </div>
+            </form>
+            <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                <div (click)="subscribeTrafficFilterResults()" class="start">
+                    <span class="content">
+                        <span *ngIf="!loading">START</span>
+                        <span *ngIf="loading"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="results col-6">
+        <textarea style="width: 80%;" placeholder="Uruchom filtr aby wyświetlić wyniki" disabled>{{trafficData |json}}</textarea>
+    </div>
+</div>
