@@ -3,37 +3,44 @@ body {
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   box-sizing: border-box;
+  color: #ffffff;
 }
 
-.set-params{
+.navbar-brand {
+  padding-left: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.set-params {
   padding-top: 10px;
   display: flex;
   justify-content: center;
   color: #ffffff;
 }
 
-.results{
+.results {
   padding-top: 10px;
   display: flex;
   justify-content: center;
   color: #ffffff;
 }
 
-.start{
+.start {
   position: relative;
   height: 120px;
   width: 120px;
-  background:linear-gradient(to top,#012404;#06800e8c);
+  background: linear-gradient(to top, #0c5f3ca1, #579092);
   border-radius: 50%;
   cursor: pointer;
 }
 
-.start:hover{
+.start:hover {
   background-color: rgba(172, 141, 2, 0.836);
   transition-duration: 0.4s;
 }
 
-.start .content{
+.start .content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -41,4 +48,22 @@ body {
   font-weight: 500;
   font-size: 21px;
   text-shadow: 1px 1px 8px rgb(75, 75, 75);
+}
+
+.filter-containter {
+  display: flex;
+  justify-content: center;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.results-scroller {
+  background-color: #eeeeee0a;
+  max-height: 200px;
+  overflow-y: scroll;
 }
