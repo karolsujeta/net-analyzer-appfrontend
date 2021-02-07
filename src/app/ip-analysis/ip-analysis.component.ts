@@ -10,15 +10,16 @@ import { FilterService } from '../_services/filter.service';
 export class IpAnalysisComponent implements OnInit {
 
   public loading: boolean = false;
-  public ipData: any;
+  public ipData: string[] = [];
 
   public ipForm = new FormGroup({
-    name: new FormControl(),
-    ip: new FormControl(),
-    amount: new FormControl()
+    name: new FormControl(''),
+    ip: new FormControl(''),
+    amount: new FormControl(''),
+    interface: new FormControl('')
   })
 
-  constructor(private _filter: FilterService) { }
+  constructor(public _filter: FilterService) { }
 
   ngOnInit(): void { }
 
@@ -33,7 +34,7 @@ export class IpAnalysisComponent implements OnInit {
     this._filter.sendFilterParameters(this.ipForm.value)
       .subscribe((data: any) => {
         this.loading = false;
-        this.ipData = data;
+        this.ipData = data.Payload.ipResults.split("\n");;
         console.log("Otrzymałem dane o pingowaniu hosta...", this.ipData);
       }, (err) => {
         this.loading = false;
