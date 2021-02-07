@@ -1,13 +1,40 @@
 <nav class="navbar navbar-light bg-light">
-  <span class="navbar-brand mb-0 h1" style="padding-left: 5px;" routerLink='/'>Analizator sieciowy</span>
+  <span class="navbar-brand mb-0 h1" routerLink='/'>Analizator sieciowy</span>
   <img src="../assets/PB_logo_poziom.png" height="30" class="d-inline-block align-top" style="padding-right: 5px;"
     alt="">
 </nav>
 
 <div class="content col-12">
 
-  <div class="box info-container col-10">
+  <div class="box col-10">
     <div class="box-title col-12">Podstawowe informacje</div>
+    <div class="info-container-loading" *ngIf="loading">
+      <span><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+      <span style="color: #dfdfdf70;">Trwa wczytywanie danych...</span>
+    </div>
+
+    <div *ngIf="!loading" class="info-container">
+      <div class="info-type">
+        <span class="info-title">Znalezione interfejsy sieciowe:</span>
+        <div *ngFor="let interface of _filter.networkInterfaces">
+          {{interface}}
+        </div>
+      </div>
+
+      <div class="info-type">
+        <span class="info-title">Dodatkowe informacje:</span>
+        <div *ngFor="let info of configResults">
+          {{info}}
+        </div>
+      </div>
+
+      <div class="info-type">
+        <span class="info-title">Parametry:</span>
+        <div *ngFor="let result of nmapResults">
+          {{result}}
+        </div>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="route==='/'; else elseBlock" class="box filters-container col-10">

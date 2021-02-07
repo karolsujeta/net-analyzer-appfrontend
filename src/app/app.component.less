@@ -9,10 +9,6 @@
   flex-wrap: wrap;
 }
 
-.info-container {
-  height: 20vh;
-}
-
 .filters-container .filter {
   padding: 15px;
   margin: 10px;
@@ -25,8 +21,7 @@
 }
 
 .filters-container .filter:hover {
-  background-color: #012404;
-  transition-duration: 0.4s;
+  background: linear-gradient(#579092, #0c5f3ca1);
   cursor: pointer;
 }
 
@@ -50,5 +45,35 @@
   height: 25px;
   padding: 0 5px 0 5px;
   color: #ffffff;
-  background-color: #066b1086;
+  background: linear-gradient(to right, #579092, #0c5f3ca1);
+}
+
+.info-type {
+  padding: 5px 15px;
+  margin: 2px;
+  background-color: #eeeeee0a;
+}
+
+.info-type:hover {
+  transition-duration: 0.2s;
+  background-color: #eeeeee1e;
+}
+
+.info-title {
+  color: #e4e4e4;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.info-container-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80px;
 }
