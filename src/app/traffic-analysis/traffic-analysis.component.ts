@@ -11,13 +11,15 @@ export class TrafficAnalysisComponent implements OnInit {
 
   public loading: boolean = false;
   public trafficData: string;
+  public trafficArray: string[] = [];
 
   public trafficForm = new FormGroup({
     name: new FormControl(''),
-    amount: new FormControl('', Validators.required)
+    amount: new FormControl('', Validators.required),
+    interface: new FormControl('')
   })
 
-  constructor(private _filter: FilterService) { }
+  constructor(public _filter: FilterService) { }
 
   ngOnInit(): void { }
 
@@ -31,9 +33,9 @@ export class TrafficAnalysisComponent implements OnInit {
 
     this._filter.sendFilterParameters(this.trafficForm.value)
       .subscribe((trafficResults: any) => {
-        this.trafficData = trafficResults;
+        this.trafficArray = trafficResults.Payload.trafficResults.split("\n");
         this.loading = false;
-        console.log("Otrzymałem dane o ruchu w sieci...", trafficResults);
+        console.log("Otrzymałem dane o ruchu w sieci...", this.trafficArray);
       }, (err) => {
         this.loading = false;
         console.error("Coś poszło nie tak z pobraniem danych o ruchu w sieci...", err);
