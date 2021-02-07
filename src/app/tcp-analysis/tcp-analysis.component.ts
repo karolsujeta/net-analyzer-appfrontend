@@ -10,15 +10,17 @@ import { FilterService } from '../_services/filter.service';
 export class TcpAnalysisComponent implements OnInit {
 
   public loading: boolean = false;
-  public tcpData: string;
+  public tcpData: string[] = [];
 
   public tcpForm = new FormGroup({
     name: new FormControl(''),
     port: new FormControl(''),
-    amount: new FormControl('')
+    protocole: new FormControl(''),
+    amount: new FormControl(''),
+    interface: new FormControl('')
   })
 
-  constructor(private _filter: FilterService) { }
+  constructor(public _filter: FilterService) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +35,7 @@ export class TcpAnalysisComponent implements OnInit {
 
     this._filter.sendFilterParameters(this.tcpForm.value)
       .subscribe((tcpResults: any) => {
-        this.tcpData = tcpResults;
+        this.tcpData = tcpResults.Payload.tcpResults.split("\n");
         this.loading = false;
         console.log("Otrzymałem dane o ruchu portu TCP", tcpResults)
       }, (err) => {

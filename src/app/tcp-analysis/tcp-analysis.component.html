@@ -1,15 +1,25 @@
-<div class="row">
-    <div class="set-params col-6">
+<div class="filter-containter row">
+    <div class="col-5">
         <div class="col-6">
             <form [formGroup]="tcpForm">
                 <div class="form-group">
                     <label for="port">Port</label>
-                    <input class="form-control" id="port" placeholder="Podaj port TCP" formControlName="port">
+                    <input class="form-control" id="port" placeholder="Podaj port" formControlName="port">
+                </div>
+                <div class="form-group">
+                    <label for="protocole">Protokół</label>
+                    <input class="form-control" id="protocole" placeholder="Podaj protokół" formControlName="protocole">
                 </div>
                 <div class="form-group">
                     <label for="amount">Ilość pomiarów</label>
                     <input class="form-control" id="amount" placeholder="Podaj liczbę pomiarów"
                         formControlName="amount">
+                </div>
+                <div class="form-group">
+                    <label for="interfaces">Interfejs</label>
+                    <select class="form-control" id="interfaces" formControlName="interface">
+                        <option *ngFor="let interface of _filter.networkInterfaces">{{interface}}</option>
+                    </select>
                 </div>
             </form>
             <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
@@ -22,7 +32,11 @@
             </div>
         </div>
     </div>
-    <div class="results col-6">
-        <textarea style="width: 80%;" placeholder="Uruchom filtr aby wyświetlić wyniki" disabled>{{tcpData |json}}</textarea>
+    <div class="results col-5">
+        <div class="col-11">
+            <textarea style="width: 100%;" placeholder="Uruchom filtr aby wyświetlić wyniki"
+                disabled>{{tcpData}}</textarea>
+        </div>
+        <button [disabled]="!tcpData.length" (click)="_filter.saveResultsToFile(tcpData, 'tcp')" class="btn btn-success col-4">Zapisz wyniki do pliku</button>
     </div>
 </div>
