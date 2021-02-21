@@ -15,21 +15,24 @@
 
     <div *ngIf="!loading" class="info-container">
       <div class="info-type">
-        <span class="info-title">Znalezione interfejsy sieciowe:</span>
+        <div class="info-title" style="text-align: center;">Dostępne interfejsy sieciowe</div>
+        <div class="separator"></div>
         <div *ngFor="let interface of _filter.networkInterfaces">
           {{interface}}
         </div>
       </div>
 
       <div class="info-type">
-        <span class="info-title">Dodatkowe informacje:</span>
+        <div class="info-title" style="text-align: center;">Podstawowe informacje</div>
+        <div class="separator"></div>
         <div *ngFor="let info of configResults">
           {{info}}
         </div>
       </div>
 
       <div class="info-type">
-        <span class="info-title">Parametry:</span>
+        <div class="info-title" style="text-align: center;">Skan routera</div>
+        <div class="separator"></div>
         <div *ngFor="let result of nmapResults">
           {{result}}
         </div>
@@ -53,7 +56,13 @@
 
   <ng-template #elseBlock>
     <div class="box filters-container col-10">
-      <div class="box-title col-12">Filtry sieciowe</div>
+      <div class="box-title col-12">Filtry sieciowe <i class="fas fa-angle-double-right"></i> 
+        <span class="title" *ngIf="route==='/traffic'"> Analiza ruchu</span>
+        <span class="title" *ngIf="route==='/pinger'"> Pingowanie sieci</span>
+        <span class="title" *ngIf="route==='/tcp'"> Analiza portu TCP</span>
+        <span class="title" *ngIf="route==='/ip'"> Śledzenie ruchu hosta/IP</span>
+        <span class="title" *ngIf="route==='/nmap'"> Otwarte porty i usługi</span>
+        </div>
       <div class="col-12" style="height: inherit;">
         <router-outlet></router-outlet>
       </div>

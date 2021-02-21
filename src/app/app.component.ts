@@ -26,6 +26,7 @@ export class AppComponent {
   ngOnInit() {
     this.subscribeNetworkInfo();
   }
+  
   /**Przeniesienie do szczegółów wybranego filtru */
   openFilter(route: string) {
     this._router.navigate([route]);
