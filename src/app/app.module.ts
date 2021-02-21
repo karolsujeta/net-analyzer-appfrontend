@@ -10,6 +10,7 @@ import { TrafficAnalysisComponent } from './traffic-analysis/traffic-analysis.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
+import { NmapAnalysisComponent } from './nmap-analysis/nmap-analysis.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ChartsModule } from 'ng2-charts';
     PingerComponent,
     IpAnalysisComponent,
     TcpAnalysisComponent,
-    TrafficAnalysisComponent
+    TrafficAnalysisComponent,
+    NmapAnalysisComponent
   ],
   imports: [
     BrowserModule,
