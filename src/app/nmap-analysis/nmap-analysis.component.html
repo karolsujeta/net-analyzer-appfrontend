@@ -1,0 +1,261 @@
+<div class="filter-containter">
+    <div class="col-5">
+        <span class="info-title">Wybierz filtr, z którego chcesz skorzystać:</span>
+        <div class="col-10 form-checks" (change)="selectNmapFilter($event)">
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="addressPorts"
+                    value="addressPorts">
+                <label class="form-check-label" for="addressPorts">
+                    Sprawdź otwarte porty wskazanego hosta lub adresu IP
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="connectedDevices"
+                    value="connectedDevices">
+                <label class="form-check-label" for="connectedDevices">
+                    Sprawdź otwarte porty urządzeń podłączonych do routera
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="traceRoute" value="traceRoute">
+                <label class="form-check-label" for="traceRoute">
+                    Sprawdź trace-route'a danego hosta/IP
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="topPortsBasic"
+                    value="topPortsBasic">
+                <label class="form-check-label" for="topPortsBasic">
+                    Sprawdź najczęściej używane porty hosta/IP (wersja podstawowa)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="topPortsAdvanced"
+                    value="topPortsAdvanced">
+                <label class="form-check-label" for="topPortsAdvanced">
+                    Sprawdź najczęściej używane porty hosta/IP (wersja zaawansowana)
+                </label>
+            </div>
+        </div>
+
+        <div *ngIf="addressPortsToggle" class="nmap-filter-container col-10 row">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+            <div class="col-8">
+                <form [formGroup]="nmapForm">
+                    <div class="form-group">
+                        <label for="address">HOST/IP</label>
+                        <input class="form-control" id="address" placeholder="Podaj adres hosta lub IP"
+                            formControlName="ip">
+                        <small>Np. pb.edu.pl</small>
+                    </div>
+
+                </form>
+                <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                    <div (click)="checkAddressPorts()" class="start">
+                        <span class="content">
+                            <span *ngIf="!addressPortsLoading">START</span>
+                            <span *ngIf="addressPortsLoading"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="connectedDevicesToggle" class="nmap-filter-container col-10 row">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+            <div class="col-8">
+                <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                    <div (click)="checkConnectedDevicesPorts()" class="start">
+                        <span class="content">
+                            <span *ngIf="!connectedDevicesLoading">START</span>
+                            <span *ngIf="connectedDevicesLoading"><i
+                                    class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="traceRouteToggle" class="nmap-filter-container col-10 row">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+            <div class="col-8">
+                <form [formGroup]="nmapForm">
+                    <div class="form-group">
+                        <label for="address">HOST/IP</label>
+                        <input class="form-control" id="address" placeholder="Podaj adres hosta lub IP"
+                            formControlName="ip">
+                        <small>Np. pb.edu.pl</small>
+                    </div>
+
+                </form>
+                <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                    <div (click)="checkTraceRoute()" class="start">
+                        <span class="content">
+                            <span *ngIf="!traceRouteLoading">START</span>
+                            <span *ngIf="traceRouteLoading"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="topPortsBasicToggle" class="nmap-filter-container col-10 row">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+            <div class="col-8">
+                <form [formGroup]="nmapForm">
+                    <div class="form-group">
+                        <label for="address">HOST/IP</label>
+                        <input class="form-control" id="address" placeholder="Podaj adres hosta lub IP"
+                            formControlName="ip">
+                        <small>Np. 192.168.0.0/24</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Liczba top-portów</label>
+                        <input class="form-control" id="amount" placeholder="Podaj liczbę top-portów"
+                            formControlName="amount">
+                    </div>
+
+                </form>
+                <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                    <div (click)="checkTopPortsBasic()" class="start">
+                        <span class="content">
+                            <span *ngIf="!topPortsBasicLoading">START</span>
+                            <span *ngIf="topPortsBasicLoading"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="topPortsAdvancedToggle" class="nmap-filter-container col-10 row">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+            <div class="col-8">
+                <form [formGroup]="nmapForm">
+                    <div class="form-group">
+                        <label for="address">HOST/IP</label>
+                        <input class="form-control" id="address" placeholder="Podaj adres hosta lub IP"
+                            formControlName="ip">
+                        <small>Np. 192.168.0.0/24</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Liczba top-portów</label>
+                        <input class="form-control" id="amount" placeholder="Podaj liczbę top-portów"
+                            formControlName="amount">
+                    </div>
+
+                </form>
+                <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
+                    <div (click)="checkTopPortsAdvanced()" class="start">
+                        <span class="content">
+                            <span *ngIf="!topPortsAdvancedLoading">START</span>
+                            <span *ngIf="topPortsAdvancedLoading"><i
+                                    class="fas fa-circle-notch fa-spin fa-2x"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div *ngIf="!isFilterPicked" class="info-title center col-12">
+            Wybierz filtr, z którego chcesz skorzystać!
+        </div>
+
+        <div *ngIf="addressPortsToggle" class="col-12">
+            <div *ngIf="!addressPortsData.length" class="info-title center col-12">
+                Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+            </div>
+
+            <div class="results-position" *ngIf="addressPortsData.length">
+                <div class="results results-scroller col-12">
+                    <div *ngFor="let res of addressPortsData" class="col-11">
+                        {{res}}
+                    </div>
+                </div>
+                <button [disabled]="!addressPortsData.length"
+                    (click)="_filter.saveResultsToFile(addressPortsData, 'address_ports')" class="btn btn-success col-4"
+                    style="margin-top: 6px;">Zapisz wyniki do pliku
+                </button>
+            </div>
+        </div>
+
+
+        <div *ngIf="connectedDevicesToggle" class="col-12">
+            <div *ngIf="!connectedDevicesPortData.length" class="info-title center col-12">
+                Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+            </div>
+
+            <div class="results-position" *ngIf="connectedDevicesPortData.length">
+                <div class="results results-scroller col-12">
+                    <div *ngFor="let res of connectedDevicesPortData" class="col-11">
+                        {{res}}
+                    </div>
+                </div>
+                <button [disabled]="!connectedDevicesPortData.length"
+                    (click)="_filter.saveResultsToFile(connectedDevicesPortData, 'connected_devices_ports')"
+                    class="btn btn-success col-4" style="margin-top: 6px;">Zapisz wyniki do pliku
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="traceRouteToggle" class="col-12">
+            <div *ngIf="!traceRouteData.length" class="info-title center col-12">
+                Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+            </div>
+
+            <div class="results-position" *ngIf="traceRouteData.length">
+                <div class="results results-scroller col-12">
+                    <div *ngFor="let res of traceRouteData" class="col-11">
+                        {{res}}
+                    </div>
+                </div>
+                <button [disabled]="!traceRouteData.length"
+                    (click)="_filter.saveResultsToFile(traceRouteData, 'trace_route')" class="btn btn-success col-4"
+                    style="margin-top: 6px;">
+                    Zapisz wyniki do pliku
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="topPortsBasicToggle" class="col-12">
+            <div *ngIf="!topPortsBasicData.length" class="info-title center col-12">
+                Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+            </div>
+
+            <div class="results-position" *ngIf="topPortsBasicData.length">
+                <div class="results results-scroller col-12">
+                    <div *ngFor="let res of topPortsBasicData" class="col-11">
+                        {{res}}
+                    </div>
+                </div>
+                <button [disabled]="!topPortsBasicData.length"
+                    (click)="_filter.saveResultsToFile(topPortsBasicData, 'top_ports_basic')"
+                    class="btn btn-success col-4" style="margin-top: 6px;">Zapisz wyniki do pliku
+                </button>
+            </div>
+        </div>
+
+        <div *ngIf="topPortsAdvancedToggle" class="col-12">
+            <div *ngIf="!topPortsAdvancedData.length" class="info-title center col-12">
+                Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+            </div>
+
+            <div class="results-position" *ngIf="topPortsAdvancedData.length">
+                <div class="results results-scroller col-12">
+                    <div *ngFor="let res of topPortsAdvancedData" class="col-11">
+                        {{res}}
+                    </div>
+                </div>
+                <button [disabled]="!topPortsAdvancedData.length"
+                    (click)="_filter.saveResultsToFile(topPortsAdvancedData, 'top_ports_advanced')"
+                    class="btn btn-success col-4" style="margin-top: 6px;">Zapisz wyniki do pliku
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
