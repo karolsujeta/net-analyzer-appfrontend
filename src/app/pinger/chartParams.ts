@@ -3,7 +3,7 @@ import { Color, Label } from 'ng2-charts';
 
 export class ChartParams {
 
-    constructor(private chartData: ChartDataSets[], private chartLabel: Label[]) { }
+    constructor(private chartData: any, private chartLabel: Label[]) { }
 
     lineChartData: ChartDataSets[] = [
         { data: this.chartData, label: 'Wartości pingów dla kolejnych pomiarów' },
@@ -14,6 +14,13 @@ export class ChartParams {
 
     lineChartOptions = {
         responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0
+                }
+            }]
+        }
     };
 
     lineChartColors: Color[] = [
