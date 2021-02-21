@@ -1,9 +1,11 @@
 <div class="filter-containter row">
     <div class="col-5">
         <div class="col-6">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+
             <form [formGroup]="ipForm">
                 <div class="form-group">
-                    <label for="ip">IP</label>
+                    <label for="ip">Adres IP</label>
                     <input class="form-control" id="ip" placeholder="Podaj adres IP do pingowania" formControlName="ip">
                 </div>
                 <div class="form-group">
@@ -28,11 +30,17 @@
             </div>
         </div>
     </div>
-    <div class="results col-5">
-        <div class="col-11">
-            <textarea style="width: 100%;" placeholder="Uruchom filtr aby wyświetlić wyniki"
-                disabled>{{ipData}}</textarea>
+
+    <div *ngIf="!ipData.length" class="info-title center col-5">
+        Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+    </div>
+
+    <div *ngIf="ipData.length" class="results col-5">
+        <div class="results results-scroller col-12">
+            <div *ngFor="let res of ipData" class="col-11">
+                {{res}}
+            </div>
         </div>
-        <button class="btn btn-success col-4">Zapisz wyniki do pliku</button>
+        <button class="btn btn-success col-4" style="margin-top: 6px;">Zapisz wyniki do pliku</button>
     </div>
 </div>

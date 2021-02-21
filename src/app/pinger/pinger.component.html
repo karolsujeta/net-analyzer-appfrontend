@@ -1,6 +1,8 @@
 <div class="filter-containter adjust row">
     <div class="col-5">
         <div class="col-6">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+
             <form [formGroup]="pingerForm">
                 <div class="form-group">
                     <label for="ip">Host</label>
@@ -23,7 +25,12 @@
             </div>
         </div>
     </div>
-    <div class="col-5" style="text-align: center;">
+
+    <div *ngIf="!pingerData.length" class="info-title center col-5">
+        Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+    </div>
+
+    <div *ngIf="pingerData.length" class="col-5" style="text-align: center;">
         <div class="col-11">
             <div class="results results-scroller">                
                 <span *ngFor="let result of pingerData">

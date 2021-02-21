@@ -1,6 +1,8 @@
 <div class="filter-containter row">
     <div class="col-5">
         <div class="col-6">
+            <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
+
             <form [formGroup]="tcpForm">
                 <div class="form-group">
                     <label for="port">Port</label>
@@ -32,11 +34,18 @@
             </div>
         </div>
     </div>
-    <div class="results col-5">
-        <div class="col-11">
-            <textarea style="width: 100%;" placeholder="Uruchom filtr aby wyświetlić wyniki"
-                disabled>{{tcpData}}</textarea>
+
+    <div *ngIf="!tcpData.length" class="info-title center col-5">
+        Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
+    </div>
+
+    <div *ngIf="tcpData.length" class="results col-5">
+        <div class="results results-scroller col-12">
+            <div *ngFor="let res of tcpData" class="col-11">
+                {{res}}
+            </div>
         </div>
-        <button [disabled]="!tcpData.length" (click)="_filter.saveResultsToFile(tcpData, 'tcp')" class="btn btn-success col-4">Zapisz wyniki do pliku</button>
+        <button [disabled]="!tcpData.length" (click)="_filter.saveResultsToFile(tcpData, 'tcp')"
+            class="btn btn-success col-4" style="margin-top: 6px;">Zapisz wyniki do pliku</button>
     </div>
 </div>
