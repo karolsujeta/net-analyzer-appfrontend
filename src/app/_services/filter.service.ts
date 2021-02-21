@@ -18,7 +18,7 @@ export class FilterService {
       { id: 1, name: 'Pingowanie sieci', route: 'pinger' },
       { id: 2, name: 'Analiza portu TCP', route: 'tcp' },
       { id: 3, name: 'Śledzenie ruchu konkretnego adresu IP', route: 'ip' },
-      { id: 4, name: 'Sprawdzanie otwarych portów i usług', route: 'open-ports' }
+      { id: 4, name: 'Sprawdzanie otwarych portów i usług', route: 'nmap' }
     ]
 
   constructor(private _http: HttpClient) { }
