@@ -37,10 +37,10 @@ export class TcpAnalysisComponent implements OnInit {
       .subscribe((tcpResults: any) => {
         this.tcpData = tcpResults.Payload.tcpResults.split("\n");
         this.loading = false;
-        console.log("Otrzymałem dane o ruchu portu TCP", tcpResults)
+        console.log("Otrzymałem dane dotyczące ruchu portu TCP", tcpResults)
       }, (err) => {
         this.loading = false;
-        console.error("Coś poszło nie tak z pobraniem danych o ruchu portu TCP w sieci...", err);
+        console.error("Coś poszło nie tak z pobraniem danych o ruchu na porcie TCP w sieci...", err);
       })
   }
 }
