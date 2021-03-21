@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: AppComponent },
   { path: 'traffic', component: TrafficAnalysisComponent },
   { path: 'pinger', component: PingerComponent },
-  { path: 'tcp', component: TcpAnalysisComponent },
+  { path: 'protocole', component: TcpAnalysisComponent },
   { path: 'ip', component: IpAnalysisComponent },
   { path: 'nmap', component: NmapAnalysisComponent }
 ];
