@@ -4,10 +4,10 @@ import { FilterService } from '../_services/filter.service';
 
 @Component({
   selector: 'app-tcp-analysis',
-  templateUrl: './tcp-analysis.component.html',
-  styleUrls: ['./tcp-analysis.component.less']
+  templateUrl: './protocole-analysis.component.html',
+  styleUrls: ['./protocole-analysis.component.less']
 })
-export class TcpAnalysisComponent implements OnInit {
+export class ProtocoleAnalysisComponent implements OnInit {
 
   public loading: boolean = false;
   public protocoleData: string[] = [];
