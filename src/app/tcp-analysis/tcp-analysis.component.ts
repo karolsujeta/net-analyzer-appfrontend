@@ -10,11 +10,10 @@ import { FilterService } from '../_services/filter.service';
 export class TcpAnalysisComponent implements OnInit {
 
   public loading: boolean = false;
-  public tcpData: string[] = [];
+  public protocoleData: string[] = [];
 
-  public tcpForm = new FormGroup({
+  public protocoleForm = new FormGroup({
     name: new FormControl(''),
-    port: new FormControl(''),
     protocole: new FormControl(''),
     amount: new FormControl(''),
     interface: new FormControl('')
@@ -25,22 +24,22 @@ export class TcpAnalysisComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /**Zasubskrybowanie winików filtra 'tshark tcp.port' */
-  subscribeTcpFilterResults() {
+  /**Zasubskrybowanie winików filtra */
+  subscribeProtocoleFilterResults() {
     this.loading = true;
 
-    this.tcpForm.patchValue({
-      name: "tcpFilter"
+    this.protocoleForm.patchValue({
+      name: "protocoleFilter"
     })
 
-    this._filter.sendFilterParameters(this.tcpForm.value)
-      .subscribe((tcpResults: any) => {
-        this.tcpData = tcpResults.Payload.tcpResults.split("\n");
+    this._filter.sendFilterParameters(this.protocoleForm.value)
+      .subscribe((data: any) => {
+        this.protocoleData = data.Payload.protocoleResults.split("\n");
         this.loading = false;
-        console.log("Otrzymałem dane dotyczące ruchu portu TCP", tcpResults)
+        console.log("Otrzymałem dane dotyczące protokołu", this.protocoleData)
       }, (err) => {
         this.loading = false;
-        console.error("Coś poszło nie tak z pobraniem danych o ruchu na porcie TCP w sieci...", err);
+        console.error("Coś poszło nie tak z pobraniem danych...", err);
       })
   }
 }

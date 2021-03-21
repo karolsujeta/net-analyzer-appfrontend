@@ -3,11 +3,7 @@
         <div class="col-6">
             <span class="info-title">Sprawdź szczegóły filtra <i class="fas fa-info-circle"></i></span>
 
-            <form [formGroup]="tcpForm">
-                <div class="form-group">
-                    <label for="port">Port</label>
-                    <input class="form-control" id="port" placeholder="Podaj port" formControlName="port">
-                </div>
+            <form [formGroup]="protocoleForm">
                 <div class="form-group">
                     <label for="protocole">Protokół</label>
                     <input class="form-control" id="protocole" placeholder="Podaj protokół" formControlName="protocole">
@@ -25,7 +21,7 @@
                 </div>
             </form>
             <div class="form-group" style="display: flex; justify-content: center; margin-top: 15px;">
-                <div (click)="subscribeTcpFilterResults()" class="start">
+                <div (click)="subscribeProtocoleFilterResults()" class="start">
                     <span class="content">
                         <span *ngIf="!loading">START</span>
                         <span *ngIf="loading"><i class="fas fa-circle-notch fa-spin fa-2x"></i></span>
@@ -35,17 +31,17 @@
         </div>
     </div>
 
-    <div *ngIf="!tcpData.length" class="info-title center col-5">
+    <div *ngIf="!protocoleData.length" class="info-title center col-5">
         Skonfiguruj i uruchom filtr, aby wyświetlić wyniki!
     </div>
 
-    <div *ngIf="tcpData.length" class="results col-5">
+    <div *ngIf="protocoleData.length" class="results col-5">
         <div class="results results-scroller col-12">
-            <div *ngFor="let res of tcpData" class="col-11">
+            <div *ngFor="let res of protocoleData" class="col-11">
                 {{res}}
             </div>
         </div>
-        <button [disabled]="!tcpData.length" (click)="_filter.saveResultsToFile(tcpData, 'tcp')"
+        <button [disabled]="!protocoleData.length" (click)="_filter.saveResultsToFile(protocoleData, 'protocole')"
             class="btn btn-success col-4" style="margin-top: 6px;">Zapisz wyniki do pliku</button>
     </div>
 </div>
