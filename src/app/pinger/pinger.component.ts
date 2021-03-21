@@ -64,7 +64,7 @@ export class PingerComponent implements OnInit, AfterViewChecked {
     let count = 0;
     for (let i = 0; i < pingArray.length; i++) {
       for (let j = 0; j < pingArray[i].length; j++) {
-        if (pingArray[i][j].charAt(0) === 'R') {
+        if (pingArray[i][j].charAt(0) === 'F') {
           this.pingerData.push((pingArray[i][j]));
           this.pingerChartData.push(pingArray[i][j].split('time').pop().split('ms')[0].substring(1));
           this.pingerChartLabel.push(String(count));
