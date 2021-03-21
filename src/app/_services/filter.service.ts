@@ -16,7 +16,7 @@ export class FilterService {
     [
       { id: 0, name: 'Analiza ruchu', route: 'traffic' },
       { id: 1, name: 'Pingowanie sieci', route: 'pinger' },
-      { id: 2, name: 'Analiza portu TCP', route: 'tcp' },
+      { id: 2, name: 'Analiza protokołu', route: 'protocole' },
       { id: 3, name: 'Śledzenie ruchu konkretnego adresu IP', route: 'ip' },
       { id: 4, name: 'Sprawdzanie otwarych portów i usług', route: 'nmap' }
     ]
@@ -33,7 +33,6 @@ export class FilterService {
         fromObject: {
           "name": filterBody.name,
           "ip": filterBody.ip,
-          "port": filterBody.port,
           "protocole": filterBody.protocole,
           "amount": filterBody.amount,
           "interface": filterBody.interface
